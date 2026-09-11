@@ -1,8 +1,14 @@
-import { type Express, type Request, type Response } from "express";
+import {
+  type Express,
+  type Request,
+  type RequestHandler,
+  type Response,
+} from "express";
 import { setupExpress } from "./configs/express.js";
 import { setupSequelize } from "./configs/sequelize.js";
 import { UserModel } from "./models/user.js";
 import { setupPassport } from "./configs/passport.js";
+import passport from "passport";
 
 const app: Express = setupExpress();
 const PORT = 3000;
@@ -12,9 +18,14 @@ type authBody = {
   password: string;
 };
 
-app.get("/", (req: Request, res: Response) => {
+const authHundler = passport.authenticate("basic", {
+  session: false,
+}) as RequestHandler;
+
+app.get("/", authHundler, (req: Request, res: Response) => {
+  const me = req.user as UserModel;
   res.render("home", {
-    username: "admin",
+    username: me.username,
   });
 });
 
