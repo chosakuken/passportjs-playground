@@ -3,10 +3,15 @@ import { setupExpress } from "./configs/express.js";
 
 const app: Express = setupExpress();
 const PORT = 3000;
+
 app.get("/", (req: Request, res: Response) => {
   res.render("home", {
     username: "admin",
   });
+});
+
+app.get("/signup", (req: Request, res: Response) => {
+  res.render("signup");
 });
 
 app.listen(PORT, () => {
