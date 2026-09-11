@@ -10,6 +10,10 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
+app.get("/signin", (req: Request, res: Response) => {
+  res.render("signin");
+});
+
 app.get("/signup", (req: Request, res: Response) => {
   res.render("signup");
 });
