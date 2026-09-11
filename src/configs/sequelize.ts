@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+import { UserAttributes, UserModel } from "../models/user.js";
 
 // sequelize のインスタンス化
 export const sequelize = new Sequelize({
@@ -15,6 +16,10 @@ export async function setupSequelize() {
     console.error("Connection Error: " + String(e));
     return;
   }
+  UserModel.init(UserAttributes, {
+    sequelize,
+    tableName: "users",
+  });
   await sequelize.sync(); // テーブル設定を同期する
   console.log("Sequelize config done");
 }
