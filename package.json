@@ -1,0 +1,24 @@
+{
+  "name": "passportjs-playground",
+  "version": "1.0.0",
+  "description": "Passport.js の各認証方式の確認用です。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chosakuken/passportjs-playground.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/chosakuken/passportjs-playground/issues"
+  },
+  "homepage": "https://github.com/chosakuken/passportjs-playground#readme",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
