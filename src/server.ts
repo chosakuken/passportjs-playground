@@ -4,7 +4,9 @@ import { setupExpress } from "./configs/express.js";
 const app: Express = setupExpress();
 const PORT = 3000;
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.render("home", {
+    username: "admin",
+  });
 });
 
 app.listen(PORT, () => {
