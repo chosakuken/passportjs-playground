@@ -1,8 +1,15 @@
-import { type Express, type Request, type Response } from "express";
+import {
+  type Express,
+  type NextFunction,
+  type Request,
+  type RequestHandler,
+  type Response,
+} from "express";
 import { setupExpress } from "./configs/express.js";
 import { setupSequelize } from "./configs/sequelize.js";
 import { UserModel } from "./models/user.js";
 import { setupPassport } from "./configs/passport.js";
+import passport from "passport";
 
 const app: Express = setupExpress();
 const PORT = 3000;
@@ -13,13 +20,27 @@ type authBody = {
 };
 
 app.get("/", (req: Request, res: Response) => {
+  if (!req.isAuthenticated()) {
+    res.redirect("/signin");
+    return;
+  }
+  const me = req.user as UserModel;
   res.render("home", {
-    username: "admin",
+    username: me.username,
   });
 });
 
 app.get("/signin", (req: Request, res: Response) => {
   res.render("signin");
+});
+
+app.post("/signin", (req: Request, res: Response, next: NextFunction) => {
+  (
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/signin",
+    }) as RequestHandler
+  )(req, res, next);
 });
 
 app.get("/signup", (req: Request, res: Response) => {

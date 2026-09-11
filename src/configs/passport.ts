@@ -27,4 +27,16 @@ export function setupPassport() {
         });
     }),
   );
+  // ユーザ -> セッション
+  passport.serializeUser((user: Express.User, cb) => {
+    process.nextTick(() => {
+      cb(null, user);
+    });
+  });
+  // セッション -> ユーザ
+  passport.deserializeUser((user: Express.User, cb) => {
+    process.nextTick(() => {
+      cb(null, user);
+    });
+  });
 }
