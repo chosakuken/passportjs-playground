@@ -10,5 +10,6 @@ export function setupExpress() {
   const app = express();
   app.set("view engine", "ejs");
   app.set("views", path.join(APP_DIR, "views"));
+  app.use(express.urlencoded({ extended: false }));
   return app;
 }
