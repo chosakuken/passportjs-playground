@@ -1,9 +1,21 @@
-import express, { type Express, type Request, type Response } from "express";
+import { type Express, type Request, type Response } from "express";
+import { setupExpress } from "./configs/express.js";
 
-const app: Express = express();
+const app: Express = setupExpress();
 const PORT = 3000;
+
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.render("home", {
+    username: "admin",
+  });
+});
+
+app.get("/signin", (req: Request, res: Response) => {
+  res.render("signin");
+});
+
+app.get("/signup", (req: Request, res: Response) => {
+  res.render("signup");
 });
 
 app.listen(PORT, () => {

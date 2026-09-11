@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "fix": "prettier -w src/",
     "lint": "prettier --check src/ && eslint src/",
-    "build": "tsc",
+    "build": "cpy 'src/views/*.ejs' dist/views && tsc",
     "start": "node dist/server.js"
   },
   "repository": {
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/express": "^5.0.6",
+    "cpy-cli": "^7.0.0",
     "eslint": "^10.10.0",
     "globals": "^17.12.0",
     "prettier": "^3.9.6",
@@ -32,6 +33,7 @@
     "typescript-eslint": "^8.70.0"
   },
   "dependencies": {
+    "ejs": "^6.0.1",
     "express": "^5.2.1"
   }
 }
