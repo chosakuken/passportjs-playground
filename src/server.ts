@@ -2,6 +2,7 @@ import { type Express, type Request, type Response } from "express";
 import { setupExpress } from "./configs/express.js";
 import { setupSequelize } from "./configs/sequelize.js";
 import { UserModel } from "./models/user.js";
+import { setupPassport } from "./configs/passport.js";
 
 const app: Express = setupExpress();
 const PORT = 3000;
@@ -40,6 +41,7 @@ app.post(
 
 async function main() {
   await setupSequelize();
+  setupPassport();
   app.listen(PORT, () => {
     console.log("Example app listening on port" + String(PORT));
   });
