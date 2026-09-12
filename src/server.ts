@@ -1,7 +1,14 @@
-import { type Express, type Request, type Response } from "express";
+import {
+  type Express,
+  type Request,
+  type RequestHandler,
+  type Response,
+} from "express";
 import { setupExpress } from "./configs/express.js";
 import { setupSequelize } from "./configs/sequelize.js";
 import { UserModel } from "./models/user.js";
+import passport from "passport";
+import { setupPassport } from "./configs/passport.js";
 
 const app: Express = setupExpress();
 const PORT = 3000;
@@ -11,7 +18,11 @@ type authBody = {
   password: string;
 };
 
-app.get("/", (req: Request, res: Response) => {
+const authHandler = passport.authenticate("digest", {
+  session: false,
+}) as RequestHandler;
+
+app.get("/", authHandler, (req: Request, res: Response) => {
   res.render("home", {
     username: "admin",
   });
@@ -40,6 +51,7 @@ app.post(
 
 async function main() {
   await setupSequelize();
+  setupPassport();
   app.listen(PORT, () => {
     console.log("Example app listening on port" + String(PORT));
   });
