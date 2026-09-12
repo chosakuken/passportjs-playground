@@ -60,6 +60,16 @@ app.post(
   },
 );
 
+app.post("/signout", (req: Request, res: Response, next: NextFunction) => {
+  req.logOut((err) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.redirect("/signin");
+  });
+});
+
 async function main() {
   await setupSequelize();
   setupPassport();
