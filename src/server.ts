@@ -23,8 +23,9 @@ const authHandler = passport.authenticate("digest", {
 }) as RequestHandler;
 
 app.get("/", authHandler, (req: Request, res: Response) => {
+  const me = req.user as UserModel;
   res.render("home", {
-    username: "admin",
+    username: me.username,
   });
 });
 
